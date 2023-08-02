@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerAnimatorManager : MonoBehaviour
 {
-    
     #region Private Fields
 
     [SerializeField]
-    private float directionDampTime = 0.25f;
+    private float directionDampTime = .25f;
+    private Animator animator;
 
     #endregion
-    #region MonoBehaviour Callbacks
 
-    private Animator animator = null;
+    #region MonoBehaviour CallBacks
+
     // Use this for initialization
     void Start()
     {
@@ -22,6 +22,7 @@ public class PlayerAnimatorManager : MonoBehaviour
         {
             Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
         }
+
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class PlayerAnimatorManager : MonoBehaviour
         }
         // deal with Jumping
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-// only allow jumping if we are running.
+        // only allow jumping if we are running.
         if (stateInfo.IsName("Base Layer.Run"))
         {
             // When using trigger parameter
