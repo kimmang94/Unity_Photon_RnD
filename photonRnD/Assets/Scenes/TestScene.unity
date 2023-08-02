@@ -365,10 +365,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: My Robot Kyle
       objectReference: {fileID: 0}
-    - target: {fileID: 5470624198487952828, guid: df6114cd59c23f14b8ed4618ef6ffc20, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1b222757b9e3844209748206173481c3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
