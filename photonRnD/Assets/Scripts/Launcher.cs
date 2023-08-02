@@ -14,14 +14,20 @@ using Photon.Realtime;
         
         #region Private Fields
         string gameVersion = "1";
-
+        bool isConnecting;
         #endregion
 
         #region MonoBehaviourPunCallbacks Callbacks
 
         public override void OnConnectedToMaster()
         {
-            PhotonNetwork.JoinRandomRoom();
+            if (isConnecting)
+            {
+                // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
+                PhotonNetwork.JoinRandomRoom();
+                isConnecting = false;
+            }
+
             Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
         }
 
@@ -82,6 +88,15 @@ using Photon.Realtime;
 
         public override void OnJoinedRoom()
         {
+            // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            {
+                Debug.Log("We load the 'Room for 1' ");
+
+                // #Critical
+                // Load the Room Level.
+                PhotonNetwork.LoadLevel("Room for 1");
+            }
             Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         }
         #endregion
