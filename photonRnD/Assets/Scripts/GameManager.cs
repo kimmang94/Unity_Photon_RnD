@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     
     #region Photon Callbacks
@@ -28,4 +28,4 @@ public class GameManager : MonoBehaviour
 
     #endregion
 }
-}
+
