@@ -27,6 +27,8 @@ using Photon.Realtime;
 
         public override void OnDisconnected(DisconnectCause cause)
         {
+            progressLabel.SetActive(false);
+            controlPanel.SetActive(true);
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
         }
 
@@ -39,6 +41,8 @@ using Photon.Realtime;
         }
         void Start()
         {
+            progressLabel.SetActive(false);
+            controlPanel.SetActive(true);
             Connect();
         }
 
@@ -46,8 +50,17 @@ using Photon.Realtime;
 
 
         #region Public Methods
+        
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        [SerializeField]
+        private GameObject controlPanel;
+        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        [SerializeField]
+        private GameObject progressLabel;
         public void Connect()
         {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
             if (PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.JoinRandomRoom();
