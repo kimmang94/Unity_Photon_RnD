@@ -24,52 +24,84 @@ public class NetWorkManager : MonoBehaviourPunCallbacks
         statusText.text = PhotonNetwork.NetworkClientState.ToString();
     }
 
+    /// <summary>
+    /// 서버 Connect기능
+    /// </summary>
+    /// <returns></returns>
     public void Connect()
     {
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    /// <summary>
+    /// 마스터 서버 Connect기능
+    /// </summary>
     public override void OnConnectedToMaster()
     {
         Debug.Log("서버 접속 완료");
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
     }
 
+    /// <summary>
+    /// DisConnect기능
+    /// </summary>
     public void DisConnect()
     {
         PhotonNetwork.Disconnect();
     }
 
+    /// <summary>
+    /// DisConnect확인
+    /// </summary>
+    /// <param name="cause"></param>
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("연결 끊김");
     }
 
+    /// <summary>
+    /// 방만들기 기능
+    /// </summary>
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(roomInput.text, new RoomOptions { MaxPlayers = 2 });
     }
-
+    /// <summary>
+    /// 룸에 들어가기 기능
+    /// </summary>
     public void JoinRoom()
     {
         PhotonNetwork.JoinRoom(roomInput.text);
     }
 
+    /// <summary>
+    /// 룸을 만들거나 들어가는 기능
+    /// </summary>
     public void JoinOrCreateRoom()
     {
         PhotonNetwork.JoinOrCreateRoom(roomInput.text, new RoomOptions { MaxPlayers = 2 }, null);
     }
 
+    /// <summary>
+    /// 랜덤으로 룸에 들어가는 기능
+    /// </summary>
     public void JoinRandomRoom()
     {
         PhotonNetwork.JoinRandomRoom();
     }
 
+    /// <summary>
+    /// 룸 떠나기기능
+    /// </summary>
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
     }
 
+
+    /// <summary>
+    /// 정보 확인 기능
+    /// </summary>
     [ContextMenu("정보")]
     private void Info()
     {
