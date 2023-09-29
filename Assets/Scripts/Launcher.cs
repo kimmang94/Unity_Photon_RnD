@@ -22,6 +22,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
    #endregion
 
+   #region [Public Fields]
+   [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+   [SerializeField]
+   private GameObject controlPanel;
+   [Tooltip("The UI Label to inform the user that the connection is in progress")]
+   [SerializeField]
+   private GameObject progressLabel;
+   
+
+   #endregion
+
    #region MonoBehaviour CallBacks
 
    private void Awake()
@@ -32,8 +43,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
    private void Start()
    {
-      //초기화 단계에서 Unity가 GameObject에 대해 호출한 MonoBehaviour 메서드입니다.
-      Connect();
+      progressLabel.SetActive(false);
+      controlPanel.SetActive(true);
    }
 
    #endregion
@@ -46,6 +57,8 @@ public class Launcher : MonoBehaviourPunCallbacks
    /// </summary>
    public void Connect()
    {
+      progressLabel.SetActive(true);
+      controlPanel.SetActive(false);
       //우리는 연결되어 있는지 확인하고, 연결되어 있으면 참여하고, 그렇지 않으면 서버에 대한 연결을 시작합니다.
       if (PhotonNetwork.IsConnected)
       {
@@ -73,6 +86,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
    public override void OnDisconnected(DisconnectCause cause)
    {
+      progressLabel.SetActive(false);
+      controlPanel.SetActive(true);
       Debug.LogWarningFormat("PUN 기초 튜토리얼/런처: OnDisconnected()가 PUN에 의해 호출된 이유 {0}", cause);
    }
 
